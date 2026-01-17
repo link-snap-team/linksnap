@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Test Upload</title>
+  </head>
+  <body>
+    <h2>Test upload → Backend</h2>
+
+    <form id="f">
+      <input id="file" type="file" name="file" required />
+      <button type="submit">Uploader</button>
+    </form>
+
+    <pre id="out"></pre>
+
+    <script>
+      const API = "https://qrfb0k7m-3001.euw.devtunnels.ms/upload"; // ton URL
+
+      document.getElementById("f").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const out = document.getElementById("out");
+        out.textContent = "Envoi...";
+
+        const fileInput = document.getElementById("file");
+        const fd = new FormData();
+        fd.append("file", fileInput.files[0]);
+
+        try {
+          const res = await fetch(API, { method: "POST", body: fd });
+          const data = await res.json().catch(() => ({}));
+          out.textContent = JSON.stringify(data, null, 2);
+        } catch (err) {
+          out.textContent = String(err);
+        }
+      });
+    </script>
+  </body>
+</html>
