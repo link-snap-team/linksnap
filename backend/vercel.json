@@ -1,7 +1,12 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/api" },
-    { "source": "/upload", "destination": "/api/upload" },
-    { "source": "/health", "destination": "/api/health" }
+  "version": 2,
+  "builds": [
+    { "src": "api/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/upload", "methods": ["POST", "OPTIONS"], "dest": "/api/upload.js" },
+    { "src": "/health", "methods": ["GET", "OPTIONS"], "dest": "/api/health.js" },
+    { "src": "/", "methods": ["GET"], "dest": "/api/index.js" },
+    { "src": "/(.*)", "dest": "/api/index.js" }
   ]
 }
