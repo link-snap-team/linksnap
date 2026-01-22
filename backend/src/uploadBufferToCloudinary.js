@@ -2,6 +2,7 @@
 const cloudinary = require("./cloudinary");
 
 function uploadBufferToCloudinary({ buffer, folder, publicId, resourceType }) {
+  cloudinary.ensureConfigured();
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {

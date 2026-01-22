@@ -22,6 +22,8 @@ function createUploadRouter() {
         return res.status(400).json({ error: { message: "Missing file field 'file'." } });
       }
 
+      cloudinary.ensureConfigured();
+
       const folderBase = process.env.CLOUDINARY_FOLDER || "linksnap";
       const uploadsFolder = `${folderBase}/uploads`;
       const qrFolder = `${folderBase}/qrcodes`;
