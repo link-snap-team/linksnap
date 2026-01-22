@@ -15,4 +15,4 @@ app.use("/upload", createUploadRouter());
 
 app.use(errorHandler);
 
-module.exports = app;
+module.exports = (req, res) => app(req, res);

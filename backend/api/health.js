@@ -11,4 +11,4 @@ app.options("*", corsMw);
 app.get("/", (req, res) => res.status(200).json({ ok: true }));
 app.get("/health", (req, res) => res.status(200).json({ ok: true }));
 
-module.exports = app;
+module.exports = (req, res) => app(req, res);
